@@ -1,9 +1,12 @@
 import styles from './Button.module.css';
+import Link from 'next/link';
 
-export function Button() {
+export function Button({ href, children, ...props }) {
   return (
-    <button type="button" className={styles.add}>
-      Add
-    </button>
+    <Link href={href}>
+      <a className={styles.add} {...props}>
+        {children}
+      </a>
+    </Link>
   );
 }
