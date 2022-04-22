@@ -1,3 +1,5 @@
+import Cards from '../../components/cards/Card';
+
 // This function runs only on the server side
 export async function getStaticProps() {
   // Instead of fetching your `/api` route you can call the same
@@ -13,9 +15,7 @@ const Hotels = ({ users }) => {
     <div>
       <h1>All hotels</h1>
       {users.map((user) => (
-        <div key={user.id}>
-          <h3>{user.name}</h3>
-        </div>
+        <Cards key={user.id} user={user} />
       ))}
       ;
     </div>
