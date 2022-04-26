@@ -36,6 +36,15 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className={styles.container}>
+          <SectionWithImage
+            subtitle="How it works"
+            text={
+              'Book with us to get the best deals. Once your reservation is ordered, you get an email verification and can rest assure that your booking is legit and safe.We also offer 30 days money back guarantee.'
+            }
+            image={'images/howitworks.png'}
+          />
+        </div>
       </main>
     </div>
   );

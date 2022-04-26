@@ -5,6 +5,7 @@ const SectionWithImage = ({
   icon,
   alt,
   title,
+  subtitle,
   text,
   width,
   height,
@@ -13,8 +14,9 @@ const SectionWithImage = ({
   return (
     <div className={styles.container}>
       <div className={styles.section}>
-        <img src={icon} width={35} height={35} alt={alt} />
+        <img src={icon} width={width} height={height} alt={alt} />
         <h1 className={title}>{title}</h1>
+        <h2 className={subtitle}>{subtitle}</h2>
         <p className={text}>{text}</p>
       </div>
       <img src={image} width={width} height={height} alt={imageAlt} />
