@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Logout = () => {
   const { push } = useRouter();
@@ -10,7 +11,11 @@ const Logout = () => {
     push('/');
   }, [push]);
 
-  return <></>;
+  return (
+    <>
+      <Link href="/login">Sign In</Link>
+    </>
+  );
 };
 
 export default Logout;
