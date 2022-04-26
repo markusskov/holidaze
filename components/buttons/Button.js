@@ -3,10 +3,12 @@ import Link from 'next/link';
 
 export function Button({ href, children, ...props }) {
   return (
-    <Link href={href}>
-      <a className={styles.add} {...props}>
-        {children}
-      </a>
-    </Link>
+    <div className={styles.buttonWrapper}>
+      <Link href={href}>
+        <a className={styles.add} {...props}>
+          {children}
+        </a>
+      </Link>
+    </div>
   );
 }
