@@ -13,7 +13,7 @@ const HotelSearch = ({}) => {
   return (
     <div className={styles.container}>
       <Select
-        label="Select City"
+        label="City"
         icon={<Search size={16} />}
         placeholder="Oslo"
         searchable
@@ -21,7 +21,7 @@ const HotelSearch = ({}) => {
         data={['Oslo', 'Bergen', 'Stavanger', 'Molde']}
       />
       <DateRangePicker
-        label="Book hotel"
+        label="Date"
         icon={<Calendar size={16} />}
         placeholder="To - From"
         value={value}

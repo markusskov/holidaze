@@ -12,7 +12,7 @@ const Navbar = () => {
       <Link href="/">Home</Link>
       <Link href="/hotels">Hotels</Link>
       <Link href="/about">About</Link>
-      <Link href="/signin">Sign In</Link>
+      <Link href="/login">Sign In</Link>
     </nav>
   );
 };

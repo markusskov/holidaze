@@ -1,6 +1,8 @@
+import styles from './Footer.module.css';
+
 const Footer = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <p>Copyright 2022</p>
     </div>
   );

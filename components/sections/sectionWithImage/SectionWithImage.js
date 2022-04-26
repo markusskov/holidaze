@@ -19,7 +19,13 @@ const SectionWithImage = ({
         <h2 className={subtitle}>{subtitle}</h2>
         <p className={text}>{text}</p>
       </div>
-      <img src={image} width={width} height={height} alt={imageAlt} />
+      <img
+        className={styles.image}
+        src={image}
+        width={width}
+        height={height}
+        alt={imageAlt}
+      />
     </div>
   );
 };
