@@ -23,7 +23,10 @@ const Login = () => {
     setAlert();
 
     axios
-      .post('http://localhost:1337/api/auth/local', values)
+      .post(
+        'https://radiant-brushlands-84668.herokuapp.com/api/auth/local',
+        values
+      )
       .then((response) => {
         const jwt = response.data.jwt;
         const username = response.data.user.username;

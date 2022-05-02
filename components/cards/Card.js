@@ -1,18 +1,21 @@
 import styles from './Card.module.scss';
+import Link from 'next/link';
 
-const Cards = ({ user }) => {
+const Cards = ({ hotel }) => {
   return (
-    <div className={styles.card}>
-      <div className={styles.container}>
-        <h4>
-          <b>{user.name}</b>
-        </h4>
-        <h4>
-          <b>{user.address.street}</b>
-        </h4>
-        <p>{user.email}</p>
-      </div>
-    </div>
+    <Link href={`/detail/${hotel.id}`}>
+      <a>
+        <div className={styles.card}>
+          <div className={styles.container}>
+            <h4>
+              <b>{hotel.attributes.name}</b>
+            </h4>
+            <p>{hotel.attributes.description}</p>
+            <p>{hotel.attributes.prize}$</p>
+          </div>
+        </div>
+      </a>
+    </Link>
   );
 };
 

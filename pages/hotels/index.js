@@ -4,18 +4,22 @@ import Cards from '../../components/cards/Card';
 export async function getStaticProps() {
   // Instead of fetching your `/api` route you can call the same
   // function directly in `getStaticProps`
-  const res = await fetch('https://jsonplaceholder.typicode.com/users');
+  const res = await fetch(
+    'https://radiant-brushlands-84668.herokuapp.com/api/hotels'
+  );
   const data = await res.json();
+  console.log(data);
   // Props returned will be passed to the page component
-  return { props: { users: data } };
+  return { props: { hotels: data.data } };
 }
 
-const Hotels = ({ users }) => {
+const Hotels = ({ hotels }) => {
+  console.log(hotels);
   return (
     <div>
       <h1>All hotels</h1>
-      {users.map((user) => (
-        <Cards key={user.id} user={user} />
+      {hotels.map((hotel) => (
+        <Cards key={hotel.id} hotel={hotel} />
       ))}
       ;
     </div>
