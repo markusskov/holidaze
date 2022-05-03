@@ -31,7 +31,7 @@ export default function Home() {
             </h2>
             <HotelSearch />
             <div className={styles.centerText}>
-              <Button href="/hotels">Seach</Button>
+              <Button href="/hotels">Search</Button>
             </div>
           </div>
         </div>
