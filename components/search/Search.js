@@ -6,19 +6,19 @@ import { Calendar, Search } from 'tabler-icons-react';
 import { Select } from '@mantine/core';
 import { NumberInput } from '@mantine/core';
 
-const HotelSearch = ({}) => {
+const HotelSearch = ({ hotel }) => {
   const [value, setValue] = useState(Date | null, Date | null);
   new Date(2022, 11, 1), new Date(2022, 11, 5);
 
   return (
     <div className={styles.container}>
       <Select
-        label="City"
+        label="Country"
         icon={<Search size={16} />}
-        placeholder="Oslo"
+        placeholder="Norway"
         searchable
         nothingFound="No options"
-        data={['Oslo', 'Bergen', 'Stavanger', 'Molde']}
+        data={['Norway', 'Spain', 'France', 'Italy']}
       />
       <DateRangePicker
         label="Date"

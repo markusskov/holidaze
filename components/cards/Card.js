@@ -3,19 +3,20 @@ import Link from 'next/link';
 
 const Cards = ({ hotel }) => {
   return (
-    <Link href={`/detail/${hotel.id}`}>
-      <a>
-        <div className={styles.card}>
-          <div className={styles.container}>
-            <h4>
-              <b>{hotel.attributes.name}</b>
-            </h4>
-            <p>{hotel.attributes.description}</p>
-            <p>{hotel.attributes.prize}$</p>
+    <div className={styles.cards}>
+      <Link href={`/detail/${hotel.id}`}>
+        <a>
+          <div className={styles.card}>
+            <div className={styles.container}>
+              <img src={hotel.attributes.img} />
+              <h4>{hotel.attributes.name}</h4>
+              <p className={styles.desc}>{hotel.attributes.description}</p>
+              <p className={styles.price}>{hotel.attributes.prize}$ / night</p>
+            </div>
           </div>
-        </div>
-      </a>
-    </Link>
+        </a>
+      </Link>
+    </div>
   );
 };
 

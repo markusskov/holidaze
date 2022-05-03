@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { Button } from '../components/buttons/Button';
 import HotelSearch from '../components/search/Search';
-
 import SectionWithImage from '../components/sections/sectionWithImage/SectionWithImage';
 import styles from '../styles/Home.module.css';
 
@@ -48,14 +47,4 @@ export default function Home() {
       </main>
     </div>
   );
-}
-
-// This function runs only on the server side
-export async function getStaticProps() {
-  // Instead of fetching your `/api` route you can call the same
-  // function directly in `getStaticProps`
-  const res = await fetch('https://jsonplaceholder.typicode.com/users');
-  const data = await res.json();
-  // Props returned will be passed to the page component
-  return { props: { users: data } };
 }

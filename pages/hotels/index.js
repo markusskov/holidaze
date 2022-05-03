@@ -1,4 +1,5 @@
 import Cards from '../../components/cards/Card';
+import styles from './Hotels.module.scss';
 
 // This function runs only on the server side
 export async function getStaticProps() {
@@ -16,12 +17,13 @@ export async function getStaticProps() {
 const Hotels = ({ hotels }) => {
   console.log(hotels);
   return (
-    <div>
+    <div className={styles.container}>
       <h1>All hotels</h1>
-      {hotels.map((hotel) => (
-        <Cards key={hotel.id} hotel={hotel} />
-      ))}
-      ;
+      <div className={styles.cards}>
+        {hotels.map((hotel) => (
+          <Cards key={hotel.id} hotel={hotel} />
+        ))}
+      </div>
     </div>
   );
 };
