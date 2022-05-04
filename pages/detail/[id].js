@@ -1,3 +1,6 @@
+import Head from 'next/head';
+import Navbar from '../../components/navbar/Navbar';
+
 export async function getStaticPaths() {
   const res = await fetch(
     'https://radiant-brushlands-84668.herokuapp.com/api/hotels'
@@ -25,7 +28,15 @@ const Details = ({ hotel }) => {
   console.log(hotel);
   return (
     <div>
-      <h1>{hotel.data.attributes.name}</h1>
+      <Head>
+        <title>Holidaze</title>
+        <meta name="description" content="Holidaze - Enjoy your vacation!" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Navbar />
+      <div>
+        <h1>{hotel.data.attributes.name}</h1>
+      </div>
     </div>
   );
 };

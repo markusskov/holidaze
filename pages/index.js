@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { Button } from '../components/buttons/Button';
+import Navbar from '../components/navbar/Navbar';
 import HotelSearch from '../components/search/Search';
 import SectionWithImage from '../components/sections/sectionWithImage/SectionWithImage';
 import styles from '../styles/Home.module.css';
@@ -12,6 +13,7 @@ export default function Home() {
         <meta name="description" content="Holidaze - Enjoy your vacation!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar />
       <main className={styles.main}>
         <div className={styles.container}>
           <SectionWithImage

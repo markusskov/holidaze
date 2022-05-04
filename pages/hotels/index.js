@@ -1,5 +1,7 @@
 import Cards from '../../components/cards/Card';
 import styles from './Hotels.module.scss';
+import Head from 'next/head';
+import Navbar from '../../components/navbar/Navbar';
 
 // This function runs only on the server side
 export async function getStaticProps() {
@@ -17,12 +19,20 @@ export async function getStaticProps() {
 const Hotels = ({ hotels }) => {
   console.log(hotels);
   return (
-    <div className={styles.container}>
-      <h1>All hotels</h1>
-      <div className={styles.cards}>
-        {hotels.map((hotel) => (
-          <Cards key={hotel.id} hotel={hotel} />
-        ))}
+    <div>
+      <Head>
+        <title>Holidaze</title>
+        <meta name="description" content="Holidaze - Enjoy your vacation!" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Navbar />
+      <div className={styles.container}>
+        <h1>All hotels</h1>
+        <div className={styles.cards}>
+          {hotels.map((hotel) => (
+            <Cards key={hotel.id} hotel={hotel} />
+          ))}
+        </div>
       </div>
     </div>
   );
