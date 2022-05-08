@@ -9,7 +9,7 @@ import { useState } from 'react';
 const Hotels = ({ hotels }) => {
   const [pageIndex, setPageIndex] = useState(1);
   const { data } = useSWR(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels?pagination[page]=${pageIndex}&pagination[pageSize]=3`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels?pagination[page]=${pageIndex}&pagination[pageSize]=6`,
     fetcher,
     {
       fallbackData: hotels,
@@ -29,22 +29,25 @@ const Hotels = ({ hotels }) => {
         <div className={styles.cards}>
           <Cards hotels={data} />
         </div>
-        <button
-          className={`${pageIndex === 1}`}
-          disabled={pageIndex === 1}
-          onClick={() => setPageIndex(pageIndex - 1)}
-        >
-          Prev
-        </button>
-        <button
-          className={`${
-            pageIndex === (data && data.meta.pagination.pageCount)
-          }`}
-          disabled={pageIndex === (data && data.meta.pagination.pageCount)}
-          onClick={() => setPageIndex(pageIndex + 1)}
-        >
-          Next
-        </button>
+        <div className={styles.paginationContainer}>
+          <button
+            className={`${(pageIndex === 1, styles.paginationButton)}`}
+            disabled={pageIndex === 1}
+            onClick={() => setPageIndex(pageIndex - 1)}
+          >
+            Prev
+          </button>
+          <button
+            className={`${
+              (pageIndex === (data && data.meta.pagination.pageCount),
+              styles.paginationButton)
+            }`}
+            disabled={pageIndex === (data && data.meta.pagination.pageCount)}
+            onClick={() => setPageIndex(pageIndex + 1)}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -54,7 +57,7 @@ export default Hotels;
 
 export async function getStaticProps() {
   const hotelResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels?pagination[page]=1&pagination[pageSize]=3`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels?pagination[page]=1&pagination[pageSize]=6`
   );
   console.log(hotelResponse);
   return {

@@ -1,11 +1,13 @@
 import Head from 'next/head';
 import { Button } from '../components/buttons/Button';
+import Cards from '../components/cards/Card';
 import Navbar from '../components/navbar/Navbar';
 import HotelSearch from '../components/search/Search';
 import SectionWithImage from '../components/sections/sectionWithImage/SectionWithImage';
+import { fetcher } from '../lib/api';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+export default function Home({ hotels }) {
   return (
     <div>
       <Head>
@@ -35,6 +37,9 @@ export default function Home() {
             <div className={styles.centerText}>
               <Button href="/hotels">Search</Button>
             </div>
+            <div className={styles.cards}>
+              <Cards hotels={hotels} />
+            </div>
           </div>
         </div>
         <div className={styles.container}>
@@ -49,4 +54,16 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const hotelResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels?pagination[page]=1&pagination[pageSize]=3`
+  );
+  console.log(hotelResponse);
+  return {
+    props: {
+      hotels: hotelResponse,
+    },
+  };
 }

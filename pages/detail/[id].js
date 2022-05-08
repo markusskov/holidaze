@@ -12,6 +12,7 @@ const Hotel = ({ hotel }) => {
       </Head>
       <Navbar />
       <h1>{hotel.attributes.title}</h1>
+      <p>{hotel.attributes.description}</p>
       <h2>{hotel.attributes.prize}</h2>
       <h3>{hotel.attributes.country}</h3>
     </div>

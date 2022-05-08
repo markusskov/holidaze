@@ -13,6 +13,24 @@
   align-items: center;
 }
 
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.paginationButton {
+  border: none;
+  padding: 1rem 2.5rem;
+  font-family: 'Poppins';
+  border-radius: 20px;
+  background-color: orange;
+  color: white;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
   .cards {
     flex-direction: column;
