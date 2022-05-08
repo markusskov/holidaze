@@ -1,9 +1,10 @@
 import { setToken } from '../../lib/auth';
 import Head from 'next/head';
 import Navbar from '../../components/navbar/Navbar';
-import styles from '../../styles/Home.module.css';
 import { useState } from 'react';
 import { fetcher } from '../../lib/api';
+import styles from './Login.module.scss';
+import SectionWithImage from '../../components/sections/sectionWithImage/SectionWithImage';
 
 const SignIn = () => {
   const [data, setData] = useState({
@@ -43,14 +44,20 @@ const SignIn = () => {
       <Navbar />
       <main className={styles.main}>
         <div className={styles.container}>
-          <li>
-            <form onSubmit={handleSubmit} className="form-inline">
+          <SectionWithImage
+            icon={'icons/mapIcon.svg'}
+            title="Sign in to your user"
+            text={'Add, edit and delete different hotels from the dashboard.'}
+            image={'illustrations/HotelIllustration.svg'}
+          />
+          <div className={styles.formContainer}>
+            <form onSubmit={handleSubmit} className={styles.form}>
               <input
                 type="text"
                 name="identifier"
                 onChange={handleChange}
                 placeholder="Username"
-                className="md:p-2 form-input py-2 rounded mx-2"
+                className={styles.formInput}
                 required
               />
               <input
@@ -58,18 +65,15 @@ const SignIn = () => {
                 name="password"
                 onChange={handleChange}
                 placeholder="Password"
-                className="md:p-2 form-input py-2 rounded mx-2"
+                className={styles.formInput}
                 required
               />
 
-              <button
-                className="md:p-2 rounded py-2 text-black bg-purple-200 p-2"
-                type="submit"
-              >
+              <button className={styles.formButton} type="submit">
                 Login
               </button>
             </form>
-          </li>
+          </div>
         </div>
       </main>
     </div>
