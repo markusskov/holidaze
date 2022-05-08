@@ -2,21 +2,19 @@ import Cards from '../../components/cards/Card';
 import styles from './Hotels.module.scss';
 import Head from 'next/head';
 import Navbar from '../../components/navbar/Navbar';
-
-// This function runs only on the server side
-export async function getStaticProps() {
-  // Instead of fetching your `/api` route you can call the same
-  // function directly in `getStaticProps`
-  const res = await fetch(
-    'https://radiant-brushlands-84668.herokuapp.com/api/hotels'
-  );
-  const data = await res.json();
-  console.log(data);
-  // Props returned will be passed to the page component
-  return { props: { hotels: data.data } };
-}
+import { fetcher } from '../../lib/api';
+import useSWR from 'swr';
+import { useState } from 'react';
 
 const Hotels = ({ hotels }) => {
+  const [pageIndex, setPageIndex] = useState(1);
+  const { data } = useSWR(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels?pagination[page]=${pageIndex}&pagination[pageSize]=3`,
+    fetcher,
+    {
+      fallbackData: hotels,
+    }
+  );
   console.log(hotels);
   return (
     <div>
@@ -29,13 +27,39 @@ const Hotels = ({ hotels }) => {
       <div className={styles.container}>
         <h1>All hotels</h1>
         <div className={styles.cards}>
-          {hotels.map((hotel) => (
-            <Cards key={hotel.id} hotel={hotel} />
-          ))}
+          <Cards hotels={data} />
         </div>
+        <button
+          className={`${pageIndex === 1}`}
+          disabled={pageIndex === 1}
+          onClick={() => setPageIndex(pageIndex - 1)}
+        >
+          Prev
+        </button>
+        <button
+          className={`${
+            pageIndex === (data && data.meta.pagination.pageCount)
+          }`}
+          disabled={pageIndex === (data && data.meta.pagination.pageCount)}
+          onClick={() => setPageIndex(pageIndex + 1)}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
 };
 
 export default Hotels;
+
+export async function getStaticProps() {
+  const hotelResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels?pagination[page]=1&pagination[pageSize]=3`
+  );
+  console.log(hotelResponse);
+  return {
+    props: {
+      hotels: hotelResponse,
+    },
+  };
+}
