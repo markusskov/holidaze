@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import styles from './Dashboard.module.css';
+import styles from './Dashboard.module.scss';
 import Head from 'next/head';
 import Navbar from '../../components/navbar/Navbar';
 import Cookies from 'js-cookie';
+import { fetcher } from '../../lib/api';
+import Table from '../../components/table/Table';
 
-const Dashboard = () => {
+const Dashboard = ({ hotels }) => {
   const [isLogged, setIsLogged] = useState();
   useEffect(() => {
     setIsLogged(Cookies.get('jwt'));
@@ -21,9 +23,14 @@ const Dashboard = () => {
       <Navbar />
       <div className={styles.container}>
         {isLogged ? (
-          <p>
-            👋🏼 &nbsp;Welcome back, <b>{Cookies.get('username')}</b>!
-          </p>
+          <>
+            <p className={styles.welcome}>
+              👋🏼 &nbsp;Welcome back, <b>{Cookies.get('username')}</b>!
+              <br />
+              Edit hotels, or add new ones.
+            </p>
+            <Table hotels={hotels} />
+          </>
         ) : (
           <>
             <p>You dont have access here.</p>
@@ -41,3 +48,15 @@ const Dashboard = () => {
   );
 };
 export default Dashboard;
+
+export async function getStaticProps() {
+  const hotelResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels`
+  );
+  console.log(hotelResponse);
+  return {
+    props: {
+      hotels: hotelResponse,
+    },
+  };
+}
