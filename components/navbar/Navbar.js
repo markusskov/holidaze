@@ -1,12 +1,18 @@
 import Link from 'next/link';
 import styles from './Navbar.module.scss';
 import { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import { unsetToken } from '../../lib/auth';
 
 const Navbar = () => {
   const [isLogged, setIsLogged] = useState();
   useEffect(() => {
-    setIsLogged(!!localStorage.getItem('jwt'));
+    setIsLogged(Cookies.get('jwt'));
   }, []);
+
+  const logout = () => {
+    unsetToken();
+  };
 
   return (
     <nav className={styles.nav}>
@@ -21,7 +27,9 @@ const Navbar = () => {
       {isLogged ? (
         <>
           <Link href="/dashboard">Dashboard</Link>
-          <Link href="/auth/Logout">Sign Out</Link>
+          <a className={styles.signOut} onClick={logout}>
+            Sign out
+          </a>
         </>
       ) : (
         <Link href="/login">Sign In</Link>

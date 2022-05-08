@@ -3,11 +3,12 @@ import { useState, useEffect } from 'react';
 import styles from './Dashboard.module.css';
 import Head from 'next/head';
 import Navbar from '../../components/navbar/Navbar';
+import Cookies from 'js-cookie';
 
 const Dashboard = () => {
   const [isLogged, setIsLogged] = useState();
   useEffect(() => {
-    setIsLogged(!!localStorage.getItem('jwt'));
+    setIsLogged(Cookies.get('jwt'));
   }, []);
 
   return (
@@ -21,7 +22,7 @@ const Dashboard = () => {
       <div className={styles.container}>
         {isLogged ? (
           <p>
-            👋🏼 &nbsp;Welcome back, <b>{localStorage.username}</b>!
+            👋🏼 &nbsp;Welcome back, <b>{Cookies.get('username')}</b>!
           </p>
         ) : (
           <>
