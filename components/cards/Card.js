@@ -12,7 +12,7 @@ const Cards = ({ hotels }) => {
                 <div className={styles.card}>
                   <div className={styles.container}>
                     <img src={hotel.attributes.img} />
-                    <h4>{hotel.name}</h4>
+                    <h4>{hotel.attributes.title}</h4>
                     <p className={styles.desc}>
                       {hotel.attributes.description}
                     </p>

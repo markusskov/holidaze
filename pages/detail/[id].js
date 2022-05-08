@@ -1,31 +1,8 @@
 import Head from 'next/head';
 import Navbar from '../../components/navbar/Navbar';
+import { fetcher } from '../../lib/api';
 
-export async function getStaticPaths() {
-  const res = await fetch(
-    'https://radiant-brushlands-84668.herokuapp.com/api/hotels'
-  );
-  const data = await res.json();
-  const id = data.data;
-  console.log(id);
-
-  const paths = id.map((hotel) => ({
-    params: { id: hotel.id.toString() },
-  }));
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }) {
-  const res = await fetch(
-    `https://radiant-brushlands-84668.herokuapp.com/api/hotels/${params.id}`
-  );
-  const hotel = await res.json();
-  return { props: { hotel } };
-}
-
-const Details = ({ hotel }) => {
-  console.log(hotel);
+const Hotel = ({ hotel }) => {
   return (
     <div>
       <Head>
@@ -34,11 +11,24 @@ const Details = ({ hotel }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div>
-        <h1>{hotel.data.attributes.name}</h1>
-      </div>
+      <h1>{hotel.attributes.title}</h1>
+      <h2>{hotel.attributes.prize}</h2>
+      <h3>{hotel.attributes.country}</h3>
     </div>
   );
 };
 
-export default Details;
+export default Hotel;
+
+export async function getServerSideProps({ params }) {
+  const { id } = params;
+  const hotelResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels/${id}`
+  );
+
+  return {
+    props: {
+      hotel: hotelResponse.data,
+    },
+  };
+}
