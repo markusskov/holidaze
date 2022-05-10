@@ -1,6 +1,15 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+```bash
+Super Admin Credentials:
+Username: admin
+Password: admin123
+```
+
+Production website:
+[Holidaze Production Website](https://holidaze-tau.vercel.app/)
 
 ## Getting Started
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 First, run the development server:
 
