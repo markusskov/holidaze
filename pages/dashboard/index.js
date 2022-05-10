@@ -6,6 +6,7 @@ import Navbar from '../../components/navbar/Navbar';
 import Cookies from 'js-cookie';
 import { fetcher } from '../../lib/api';
 import Table from '../../components/table/Table';
+import { Button } from '../../components/buttons/Button';
 
 const Dashboard = ({ hotels }) => {
   const [isLogged, setIsLogged] = useState();
@@ -30,6 +31,7 @@ const Dashboard = ({ hotels }) => {
               Edit hotels, or add new ones.
             </p>
             <Table hotels={hotels} />
+            <Button href="/dashboard/addHotel">Add new hotel</Button>
           </>
         ) : (
           <>

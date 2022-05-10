@@ -6,10 +6,11 @@
   border-radius: 5px;
   padding: 1rem;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: fit-content;
   background-color: white;
   max-width: 300px;
+  height: 550px;
 }
 
 .card:hover {
@@ -27,12 +28,16 @@
   color: black;
 }
 
+.image {
+  border-radius: 15px;
+}
+
 @media screen and (max-width: 768px) {
   .card {
-    max-width: 100%;
+    width: 100%;
     justify-content: center;
-    align-items: center;
     text-align: center;
+    height: auto;
   }
   .desc {
     text-align: center;

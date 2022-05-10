@@ -1,5 +1,6 @@
 import styles from './Card.module.scss';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Cards = ({ hotels }) => {
   return (
@@ -11,7 +12,13 @@ const Cards = ({ hotels }) => {
               <a>
                 <div className={styles.card}>
                   <div className={styles.container}>
-                    <img src={hotel.attributes.img} />
+                    <Image
+                      className={styles.image}
+                      src={hotel.attributes.img}
+                      alt={hotel.attributes.title}
+                      width={267}
+                      height={261}
+                    />
                     <h4>{hotel.attributes.title}</h4>
                     <p className={styles.desc}>
                       {hotel.attributes.description}
