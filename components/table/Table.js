@@ -1,6 +1,8 @@
 import { fetcher } from '../../lib/api';
 import { Button } from '../buttons/Button';
 import styles from './Table.module.scss';
+import { Edit } from 'tabler-icons-react';
+import Link from 'next/link';
 
 const Table = ({ hotels }) => {
   return (
@@ -35,7 +37,13 @@ const Table = ({ hotels }) => {
                 <td className={styles.tableHead}>
                   {hotel.attributes.prize}$ /night
                 </td>
-                <td className={styles.tableHead}>Edit</td>
+                <td className={styles.tableHead}>
+                  <Link href={`/dashboard/editHotel/${hotel.id}`}>
+                    <a>
+                      <Edit size={24} color="orange" />
+                    </a>
+                  </Link>
+                </td>
               </tr>
             );
           })}
