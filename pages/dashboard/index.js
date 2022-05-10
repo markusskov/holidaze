@@ -53,7 +53,7 @@ const Dashboard = ({ hotels }) => {
 };
 export default Dashboard;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const hotelResponse = await fetcher(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels`
   );
