@@ -31,7 +31,9 @@ const Dashboard = ({ hotels }) => {
               Edit hotels, or add new ones.
             </p>
             <Table hotels={hotels} />
-            <Button href="/dashboard/addHotel">Add new hotel</Button>
+            <div className={styles.buttonContainer}>
+              <Button href="/dashboard/addHotel">Add new hotel</Button>
+            </div>
           </>
         ) : (
           <>
