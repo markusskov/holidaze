@@ -14,14 +14,16 @@ const EditHotel = ({ hotel }) => {
   }, []);
 
   // Edit states for inputs on a updated hotel
-  const [hotelName, sethotelName] = useState('');
-  const [hotelDesc, sethotelDesc] = useState('');
-  const [hotelFullDesc, sethotelFullDesc] = useState('');
-  const [hotelPrice, sethotelPrice] = useState('');
-  const [hotelCountry, sethotelCountry] = useState('');
-  const [hotelCity, sethotelCity] = useState('');
+  const [hotelName, sethotelName] = useState(hotel.attributes.title);
+  const [hotelDesc, sethotelDesc] = useState(hotel.attributes.description);
+  const [hotelFullDesc, sethotelFullDesc] = useState(
+    hotel.attributes.full_desc
+  );
+  const [hotelPrice, sethotelPrice] = useState(hotel.attributes.prize);
+  const [hotelCountry, sethotelCountry] = useState(hotel.attributes.country);
+  const [hotelCity, sethotelCity] = useState(hotel.attributes.city);
   const [hotelAllInclusive, sethotelAllInclusive] = useState(false);
-  const [hotelImg, sethotelImg] = useState('');
+  const [hotelImg, sethotelImg] = useState(hotel.attributes.img);
 
   // Sending info to Strapi
   async function NewHotel() {
@@ -37,15 +39,18 @@ const EditHotel = ({ hotel }) => {
       img: hotelImg,
     };
 
-    const add = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels`, {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-        Accept: 'application/json',
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({ data: hotelInfo }),
-    });
+    const add = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels/${hotel.id}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ data: hotelInfo }),
+      }
+    );
 
     const getResponse = await add.json();
     console.log(getResponse);
@@ -63,11 +68,17 @@ const EditHotel = ({ hotel }) => {
         {isLogged ? (
           <>
             <p className={styles.welcome}>
-              Edit hotel:
+              You are editing{' '}
+              <Link href={`/detail/${hotel.id}`}>
+                <a>
+                  <u>{hotel.attributes.title}</u>
+                </a>
+              </Link>
               <br />
             </p>
             <div className={styles.formContainer}>
               <form className={styles.form}>
+                <label className={styles.label}>Hotel name</label>
                 <input
                   className={styles.formInput}
                   type="text"
@@ -76,6 +87,7 @@ const EditHotel = ({ hotel }) => {
                   placeholder={hotel.attributes.title}
                 />
                 <br />
+                <label className={styles.label}>Hotel short description</label>
                 <input
                   className={styles.formInput}
                   type="text"
@@ -84,6 +96,7 @@ const EditHotel = ({ hotel }) => {
                   placeholder={hotel.attributes.description}
                 />
                 <br />
+                <label className={styles.label}>Hotel full description</label>
                 <textarea
                   className={styles.formInput}
                   type="text"
@@ -92,6 +105,7 @@ const EditHotel = ({ hotel }) => {
                   placeholder={hotel.attributes.full_desc}
                 />
                 <br />
+                <label className={styles.label}>Price</label>
                 <input
                   className={styles.formInput}
                   type="number"
@@ -100,6 +114,7 @@ const EditHotel = ({ hotel }) => {
                   placeholder={`${hotel.attributes.prize} $`}
                 />
                 <br />
+                <label className={styles.label}>Country</label>
                 <input
                   className={styles.formInput}
                   type="text"
@@ -108,6 +123,7 @@ const EditHotel = ({ hotel }) => {
                   placeholder={hotel.attributes.country}
                 />
                 <br />
+                <label className={styles.label}>City</label>
                 <input
                   className={styles.formInput}
                   type="text"
@@ -116,6 +132,7 @@ const EditHotel = ({ hotel }) => {
                   placeholder={hotel.attributes.city}
                 />
                 <br />
+                <label className={styles.label}>Image Url</label>
                 <input
                   className={styles.formInput}
                   type="text"
@@ -129,7 +146,7 @@ const EditHotel = ({ hotel }) => {
                   type="button"
                   onClick={NewHotel}
                 >
-                  Add new hotel
+                  Edit hotel
                 </button>
               </form>
             </div>
