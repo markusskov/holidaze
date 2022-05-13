@@ -4,7 +4,7 @@ import Navbar from '../../components/navbar/Navbar';
 import { useState } from 'react';
 import { fetcher } from '../../lib/api';
 import styles from './Login.module.scss';
-import SectionWithImage from '../../components/sections/sectionWithImage/SectionWithImage';
+import Image from 'next/image';
 
 const SignIn = () => {
   const [data, setData] = useState({
@@ -44,27 +44,24 @@ const SignIn = () => {
       <Navbar />
       <main className={styles.main}>
         <div className={styles.container}>
-          <SectionWithImage
-            icon={'icons/mapIcon.svg'}
-            title="Sign in to your user"
-            text={'Add, edit and delete different hotels from the dashboard.'}
-            image={'illustrations/HotelIllustration.svg'}
-          />
           <div className={styles.formContainer}>
+            <h1 className={styles.header}>Welcome Back</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
+              <label className={styles.label}>Username</label>
               <input
                 type="text"
                 name="identifier"
                 onChange={handleChange}
-                placeholder="Username"
+                placeholder="username@email.com"
                 className={styles.formInput}
                 required
               />
+              <label className={styles.label}>Password</label>
               <input
                 type="password"
                 name="password"
                 onChange={handleChange}
-                placeholder="Password"
+                placeholder="minimum 5 characters"
                 className={styles.formInput}
                 required
               />
@@ -74,6 +71,12 @@ const SignIn = () => {
               </button>
             </form>
           </div>
+          <Image
+            src={'/illustrations/HotelIllustration.svg'}
+            alt={'Hotel'}
+            width={500}
+            height={500}
+          />
         </div>
       </main>
     </div>

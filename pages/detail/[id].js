@@ -1,6 +1,11 @@
 import Head from 'next/head';
 import Navbar from '../../components/navbar/Navbar';
+import styles from './Detail.module.scss';
 import { fetcher } from '../../lib/api';
+import Image from 'next/image';
+import { NumberInput } from '@mantine/core';
+import { Bed } from 'tabler-icons-react';
+import { Button } from '../../components/buttons/Button';
 
 const Hotel = ({ hotel }) => {
   return (
@@ -11,10 +16,79 @@ const Hotel = ({ hotel }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <h1>{hotel.attributes.title}</h1>
-      <p>{hotel.attributes.description}</p>
-      <h2>{hotel.attributes.prize}</h2>
-      <h3>{hotel.attributes.country}</h3>
+      <div className={styles.containerBlue}>
+        <div className={styles.main}>
+          <div className={styles.mainInfo}>
+            <h1>
+              {hotel.attributes.title}, {hotel.attributes.city}
+            </h1>
+            <h2>Details</h2>
+            <h2>{hotel.attributes.prize}</h2>
+            <h3>{hotel.attributes.country}</h3>
+          </div>
+          <div className={styles.mainImage}>
+            <Image
+              src={hotel.attributes.img}
+              alt={hotel.attributes.name}
+              width={400}
+              height={400}
+            />
+          </div>
+        </div>
+      </div>
+      <div className={styles.container}>
+        <div className={styles.mainDesc}>
+          <div className={styles.mainInfo}>
+            <h2>About the hotel</h2>
+            <p className={styles.desc}>{hotel.attributes.description}</p>
+            <h2>Stuff you can do</h2>
+            <p className={styles.desc}>{hotel.attributes.description}</p>
+            <h2>Food and drinks</h2>
+            <p className={styles.desc}>{hotel.attributes.description}</p>
+          </div>
+          <div className={styles.mainImage}>
+            <div className={styles.infoBox}>
+              <h2>Quick Facts</h2>
+              <strong>Beach: </strong>
+              <strong>Restaurant: </strong>
+              <strong>Wifi: </strong>
+            </div>
+          </div>
+        </div>
+        <div className={styles.booking}>
+          <div className={styles.bookingBorder}>
+            <div className={styles.bookingLine}>
+              <h3>Double Room</h3>
+              <NumberInput
+                className={styles.input}
+                placeholder="Max 5"
+                max={5}
+                min={0}
+              />
+            </div>
+            <div className={styles.room}>
+              <Bed size={16} />
+              {''}
+              <p className={styles.roomBed}>1 Double bed</p>
+            </div>
+            <div className={styles.bookingLine}>
+              <div>
+                <p className={styles.bookingDesc}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Quisque et dui quis lacus pulvinar suscipit vitae vitae est.
+                  Suspendisse vestibulum ut nunc in sagittis.{' '}
+                </p>
+              </div>
+              <div>
+                <p className={styles.price}>
+                  {hotel.attributes.prize}$ / per night
+                </p>
+                <Button href={'/enquiry'}>Book room</Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
