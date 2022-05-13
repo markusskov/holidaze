@@ -1,4 +1,4 @@
-import styles from './Search.module.css';
+import styles from './Search.module.scss';
 
 import { useState, useEffect } from 'react';
 import { DateRangePicker } from '@mantine/dates';
@@ -7,7 +7,7 @@ import { Select } from '@mantine/core';
 import { NumberInput } from '@mantine/core';
 import Cookies from 'js-cookie';
 
-const HotelSearch = ({ hotels }) => {
+const HotelSearch = () => {
   const [value, setValue] = useState([Date | null][Date | null]);
   const [people, setPeople] = useState('');
   new Date(2022, 11, 1), new Date(2022, 11, 5);

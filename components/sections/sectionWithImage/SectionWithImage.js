@@ -1,4 +1,4 @@
-import styles from './SectionWithImage.module.css';
+import styles from './SectionWithImage.module.scss';
 
 const SectionWithImage = ({
   image,
