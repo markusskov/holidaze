@@ -6,8 +6,23 @@ import Image from 'next/image';
 import { NumberInput } from '@mantine/core';
 import { Bed } from 'tabler-icons-react';
 import { Button } from '../../components/buttons/Button';
+import Cookies from 'js-cookie';
+import { useState, useEffect } from 'react';
+import moment from 'moment';
 
 const Hotel = ({ hotel }) => {
+  const peopleFromHomePage = Cookies.get('people');
+  const [People, setPeople] = useState(parseFloat(peopleFromHomePage) || '0');
+  const [date, setDate] = useState('');
+  Cookies.set('people', People);
+
+  useEffect(() => {
+    // Restoring dates from Local Storage to get it back as an array
+    const getDates = localStorage.getItem('date');
+    const DatesArray = JSON.parse(getDates);
+    setDate(DatesArray);
+  }, []);
+
   return (
     <div>
       <Head>
@@ -59,7 +74,13 @@ const Hotel = ({ hotel }) => {
           <div className={styles.bookingBorder}>
             <div className={styles.bookingLine}>
               <h3>Double Room</h3>
+              <p className={styles.dates}>
+                {moment(date[0]).utc().format('LL')} -{' '}
+                {moment(date[1]).utc().format('LL')}
+              </p>
               <NumberInput
+                value={People}
+                onChange={setPeople}
                 className={styles.input}
                 placeholder="Max 5"
                 max={5}
