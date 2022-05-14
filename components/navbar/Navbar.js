@@ -21,9 +21,11 @@ const Navbar = () => {
           <Link href="/">Holidaze</Link>
         </h1>
       </div>
-      <Link href="/">Home</Link>
-      <Link href="/hotels">Hotels</Link>
-      <Link href="/about">About</Link>
+      <div className={styles.navLinks}>
+        <Link href="/">Home</Link>
+        <Link href="/hotels">Hotels</Link>
+        <Link href="/about">About</Link>
+      </div>
       {isLogged ? (
         <>
           <Link href="/dashboard">Dashboard</Link>

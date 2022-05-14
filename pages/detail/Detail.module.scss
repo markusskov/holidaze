@@ -76,3 +76,21 @@
 .roomBed {
   margin-left: 1rem;
 }
+
+@media (max-width: 767px) {
+  .main {
+    flex-direction: column-reverse;
+  }
+
+  .bookingLine {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .bookingDesc,
+  .room,
+  .dates {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -4,7 +4,7 @@ import styles from './Detail.module.scss';
 import { fetcher } from '../../lib/api';
 import Image from 'next/image';
 import { NumberInput } from '@mantine/core';
-import { Bed } from 'tabler-icons-react';
+import { Bed, Italic } from 'tabler-icons-react';
 import { Button } from '../../components/buttons/Button';
 import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
@@ -75,6 +75,7 @@ const Hotel = ({ hotel }) => {
             <div className={styles.bookingLine}>
               <h3>Double Room</h3>
               <p className={styles.dates}>
+                Date: {''}
                 {moment(date[0]).utc().format('LL')} -{' '}
                 {moment(date[1]).utc().format('LL')}
               </p>
@@ -104,7 +105,7 @@ const Hotel = ({ hotel }) => {
                 <p className={styles.price}>
                   {hotel.attributes.prize}$ / per night
                 </p>
-                <Button href={'/enquiry'}>Book room</Button>
+                <Button href={'/enquiry'}>Book</Button>
               </div>
             </div>
           </div>

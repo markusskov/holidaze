@@ -15,7 +15,6 @@ const HotelSearch = () => {
   useEffect(() => {
     localStorage.setItem('date', JSON.stringify(value));
     Cookies.set('people', people);
-    console.log(value);
   }, [people, value]);
   return (
     <div className={styles.container}>
@@ -38,7 +37,7 @@ const HotelSearch = () => {
         label="People"
         placeholder="2 people"
         max={5}
-        min={0}
+        min={1}
         value={people}
         onChange={setPeople}
       />

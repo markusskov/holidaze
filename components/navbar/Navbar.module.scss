@@ -17,3 +17,9 @@
 .signOut {
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  .navLinks {
+    display: none;
+  }
+}
