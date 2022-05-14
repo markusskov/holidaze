@@ -84,6 +84,7 @@ const Hotel = ({ hotel }) => {
                 onChange={setPeople}
                 className={styles.input}
                 placeholder="Max 5"
+                label="People"
                 max={5}
                 min={0}
               />
