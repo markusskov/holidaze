@@ -3,19 +3,38 @@ import styles from './Hotels.module.scss';
 import Head from 'next/head';
 import Navbar from '../../components/navbar/Navbar';
 import { fetcher } from '../../lib/api';
-import useSWR from 'swr';
 import { useState } from 'react';
+import Select from 'react-select';
+import { useQuery, useQueryClient } from 'react-query';
 
-const Hotels = ({ hotels }) => {
-  const [pageIndex, setPageIndex] = useState(1);
-  const { data } = useSWR(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels?pagination[page]=${pageIndex}&pagination[pageSize]=6`,
-    fetcher,
-    {
-      fallbackData: hotels,
-    }
+const getHotels = async (key) => {
+  console.log(key);
+
+  const countriesId = key.queryKey[1].country.map(
+    (id) => `filters[countries]=${id}`
   );
-  console.log(hotels);
+  console.log(countriesId);
+  const countryQueryString = countriesId.join('&');
+  console.log(countryQueryString);
+
+  if (countryQueryString) {
+    const res = await fetcher(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels?${countryQueryString}`
+    );
+    return res.data;
+  }
+
+  const res = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels`);
+  return res.data;
+};
+
+const Hotels = ({ countries }) => {
+  const queryClient = useQueryClient();
+  const [countryId, setCountryId] = useState([]);
+  const { data, status } = useQuery(
+    ['hotels', { country: countryId }],
+    getHotels
+  );
   return (
     <div>
       <Head>
@@ -25,28 +44,20 @@ const Hotels = ({ hotels }) => {
       </Head>
       <Navbar />
       <div className={styles.container}>
+        <Select
+          getOptionLabel={(option) => `${option.attributes.country}`}
+          getOptionValue={(option) => option.id}
+          options={countries}
+          instanceId="countries"
+          isMulti
+          placeholder="Filter By Country"
+          onChange={(values) =>
+            setCountryId(values.map((country) => country.id))
+          }
+        />
         <h1>All hotels</h1>
         <div className={styles.cards}>
-          <Cards hotels={data} />
-        </div>
-        <div className={styles.paginationContainer}>
-          <button
-            className={`${(pageIndex === 1, styles.paginationButton)}`}
-            disabled={pageIndex === 1}
-            onClick={() => setPageIndex(pageIndex - 1)}
-          >
-            Prev
-          </button>
-          <button
-            className={`${
-              (pageIndex === (data && data.meta.pagination.pageCount),
-              styles.paginationButton)
-            }`}
-            disabled={pageIndex === (data && data.meta.pagination.pageCount)}
-            onClick={() => setPageIndex(pageIndex + 1)}
-          >
-            Next
-          </button>
+          {status === 'success' && <Cards data={data} />}
         </div>
       </div>
     </div>
@@ -55,14 +66,18 @@ const Hotels = ({ hotels }) => {
 
 export default Hotels;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const hotelResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels?pagination[page]=1&pagination[pageSize]=6`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels`
+  );
+  const categoryResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/countries`
   );
   console.log(hotelResponse);
   return {
     props: {
-      hotels: hotelResponse,
+      hotels: hotelResponse.data,
+      countries: categoryResponse.data,
     },
   };
 }

@@ -72,9 +72,7 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
+  gap: 0.5rem;
 }
 
 .card {
@@ -125,6 +123,9 @@
 @media (max-width: 600px) {
   .grid {
     width: 100%;
+    flex-direction: column;
+  }
+  .cards {
     flex-direction: column;
   }
 }
