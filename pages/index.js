@@ -32,7 +32,7 @@ export default function Home({ data, countries }) {
           <div className={styles.container}>
             <h2 className={styles.centerText}>
               Search for your next vacation.
-              <br /> Browse through countries after you set the date and people.
+              <br /> Browse through hotels after you set the date and people.
             </h2>
             <HotelSearch data={countries} />
             <div className={styles.centerText}>

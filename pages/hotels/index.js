@@ -10,14 +10,14 @@ import Cookies from 'js-cookie';
 import HotelSearch from '../../components/search/Search';
 import { NumberInput } from '@mantine/core';
 import moment from 'moment';
+import Router from 'next/router';
+import Link from 'next/link';
 
 const getHotels = async (key) => {
-  console.log(key);
-
   const countriesId = key.queryKey[1].country.map(
     (id) => `filters[countries]=${id}`
   );
-  console.log(countriesId);
+
   const countryQueryString = countriesId.join('&');
 
   if (countryQueryString) {
@@ -31,7 +31,7 @@ const getHotels = async (key) => {
   return res.data;
 };
 
-const Hotels = ({ countries }) => {
+const Hotels = ({ hotels, countries }) => {
   const queryClient = useQueryClient();
   const [countryId, setCountryId] = useState([]);
   const [date, setDate] = useState('');
@@ -39,6 +39,14 @@ const Hotels = ({ countries }) => {
     ['hotels', { country: countryId }],
     getHotels
   );
+
+  const searchList = hotels.map(({ attributes, id }) => {
+    return {
+      value: attributes.title,
+      label: attributes.title,
+      id: id,
+    };
+  });
 
   const peopleFromHomePage = Cookies.get('people');
   const [People, setPeople] = useState(parseFloat(peopleFromHomePage) || '0');
@@ -62,9 +70,20 @@ const Hotels = ({ countries }) => {
       <div className={styles.container}>
         <div className={styles.filter}>
           <div>
+            <label>Search hotel</label>
+            <Select
+              options={searchList}
+              placeholder="Search by name"
+              openMenuOnClick={false}
+              getOptionValue={(option) => option.id}
+              onChange={(selectedOption) => {
+                Router.push(`/detail/${selectedOption.id}`);
+              }}
+            />
+          </div>
+          <div>
             <label>Select Country</label>
             <Select
-              formatOptionLabel={'test'}
               className={styles.selectCountry}
               getOptionLabel={(option) => `${option.attributes.country}`}
               getOptionValue={(option) => option.id}
@@ -77,6 +96,7 @@ const Hotels = ({ countries }) => {
               }
             />
           </div>
+
           <div>
             <label>Select People</label>
             <NumberInput
@@ -96,7 +116,6 @@ const Hotels = ({ countries }) => {
             </p>
           </div>
         </div>
-
         <h1>Hotels</h1>
         <div className={styles.cards}>
           {status === 'success' && <Cards data={data} />}
@@ -112,6 +131,7 @@ export async function getServerSideProps() {
   const hotelResponse = await fetcher(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels`
   );
+
   const categoryResponse = await fetcher(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/countries`
   );

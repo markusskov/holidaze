@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import styles from './Enquiry.module.scss';
 import { useState, useEffect } from 'react';
 import moment from 'moment';
+import Router from 'next/router';
 
 const Enquiry = () => {
   const [people, setPeople] = useState('');
@@ -41,8 +42,9 @@ const Enquiry = () => {
       },
       body: JSON.stringify({ data: hotelInfo }),
     });
-
+    Router.push('/success');
     const getResponse = await add.json();
+    console.log(getResponse);
   }
 
   return (
