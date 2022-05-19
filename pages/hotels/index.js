@@ -3,9 +3,13 @@ import styles from './Hotels.module.scss';
 import Head from 'next/head';
 import Navbar from '../../components/navbar/Navbar';
 import { fetcher } from '../../lib/api';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { useQuery, useQueryClient } from 'react-query';
+import Cookies from 'js-cookie';
+import HotelSearch from '../../components/search/Search';
+import { NumberInput } from '@mantine/core';
+import moment from 'moment';
 
 const getHotels = async (key) => {
   console.log(key);
@@ -15,7 +19,6 @@ const getHotels = async (key) => {
   );
   console.log(countriesId);
   const countryQueryString = countriesId.join('&');
-  console.log(countryQueryString);
 
   if (countryQueryString) {
     const res = await fetcher(
@@ -31,10 +34,23 @@ const getHotels = async (key) => {
 const Hotels = ({ countries }) => {
   const queryClient = useQueryClient();
   const [countryId, setCountryId] = useState([]);
+  const [date, setDate] = useState('');
   const { data, status } = useQuery(
     ['hotels', { country: countryId }],
     getHotels
   );
+
+  const peopleFromHomePage = Cookies.get('people');
+  const [People, setPeople] = useState(parseFloat(peopleFromHomePage) || '0');
+  Cookies.set('people', People);
+
+  useEffect(() => {
+    // Restoring dates from Local Storage to get it back as an array
+    const getDates = localStorage.getItem('date');
+    const DatesArray = JSON.parse(getDates);
+    setDate(DatesArray);
+  }, []);
+
   return (
     <div>
       <Head>
@@ -44,18 +60,44 @@ const Hotels = ({ countries }) => {
       </Head>
       <Navbar />
       <div className={styles.container}>
-        <Select
-          getOptionLabel={(option) => `${option.attributes.country}`}
-          getOptionValue={(option) => option.id}
-          options={countries}
-          instanceId="countries"
-          isMulti
-          placeholder="Filter By Country"
-          onChange={(values) =>
-            setCountryId(values.map((country) => country.id))
-          }
-        />
-        <h1>All hotels</h1>
+        <div className={styles.filter}>
+          <div>
+            <label>Select Country</label>
+            <Select
+              formatOptionLabel={'test'}
+              className={styles.selectCountry}
+              getOptionLabel={(option) => `${option.attributes.country}`}
+              getOptionValue={(option) => option.id}
+              options={countries}
+              instanceId="countries"
+              isMulti
+              placeholder="Filter By Country"
+              onChange={(values) =>
+                setCountryId(values.map((country) => country.id))
+              }
+            />
+          </div>
+          <div>
+            <label>Select People</label>
+            <NumberInput
+              value={People}
+              onChange={setPeople}
+              className={styles.input}
+              placeholder="Max 5"
+              max={5}
+              min={0}
+            />
+          </div>
+          <div>
+            <label>Selected Date</label>
+            <p className={styles.date}>
+              {moment(date[0]).utc().format('LL')} -{' '}
+              {moment(date[1]).utc().format('LL')}
+            </p>
+          </div>
+        </div>
+
+        <h1>Hotels</h1>
         <div className={styles.cards}>
           {status === 'success' && <Cards data={data} />}
         </div>
@@ -73,7 +115,6 @@ export async function getServerSideProps() {
   const categoryResponse = await fetcher(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/countries`
   );
-  console.log(hotelResponse);
   return {
     props: {
       hotels: hotelResponse.data,

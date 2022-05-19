@@ -7,7 +7,7 @@ import SectionWithImage from '../components/sections/sectionWithImage/SectionWit
 import { fetcher } from '../lib/api';
 import styles from '../styles/Home.module.css';
 
-export default function Home({ hotels }) {
+export default function Home({ data, countries }) {
   return (
     <div>
       <Head>
@@ -31,14 +31,15 @@ export default function Home({ hotels }) {
         <div className={styles.secondaryBG}>
           <div className={styles.container}>
             <h2 className={styles.centerText}>
-              Search for a hotel, or browse our recommended
+              Search for your next vacation.
+              <br /> Browse through countries after you set the date and people.
             </h2>
-            <HotelSearch />
+            <HotelSearch data={countries} />
             <div className={styles.centerText}>
               <Button href="/hotels">Search</Button>
             </div>
             <div className={styles.cards}>
-              <Cards hotels={hotels} />
+              <Cards data={data} />
             </div>
           </div>
         </div>
@@ -56,14 +57,17 @@ export default function Home({ hotels }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const hotelResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels?pagination[page]=1&pagination[pageSize]=3`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels`
   );
-  console.log(hotelResponse);
+  const categoryResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/countries`
+  );
   return {
     props: {
-      hotels: hotelResponse,
+      hotels: hotelResponse.data,
+      countries: categoryResponse.data,
     },
   };
 }

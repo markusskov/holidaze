@@ -19,7 +19,6 @@ const AddHotel = ({}) => {
   const [hotelPrice, sethotelPrice] = useState('');
   const [hotelCountry, sethotelCountry] = useState('');
   const [hotelCity, sethotelCity] = useState('');
-  const [hotelAllInclusive, sethotelAllInclusive] = useState(false);
   const [hotelImg, sethotelImg] = useState('');
 
   // Sending info to Strapi

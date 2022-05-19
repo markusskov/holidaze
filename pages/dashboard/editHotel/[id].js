@@ -22,7 +22,6 @@ const EditHotel = ({ hotel }) => {
   const [hotelPrice, sethotelPrice] = useState(hotel.attributes.prize);
   const [hotelCountry, sethotelCountry] = useState(hotel.attributes.country);
   const [hotelCity, sethotelCity] = useState(hotel.attributes.city);
-  const [hotelAllInclusive, sethotelAllInclusive] = useState(false);
   const [hotelImg, sethotelImg] = useState(hotel.attributes.img);
 
   // Sending info to Strapi

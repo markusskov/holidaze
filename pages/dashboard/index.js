@@ -5,10 +5,11 @@ import Head from 'next/head';
 import Navbar from '../../components/navbar/Navbar';
 import Cookies from 'js-cookie';
 import { fetcher } from '../../lib/api';
-import Table from '../../components/table/Table';
+import Table from '../../components/table/hotels/Table';
 import { Button } from '../../components/buttons/Button';
+import Enquiry from '../../components/table/enquiry/Enquiry';
 
-const Dashboard = ({ hotels }) => {
+const Dashboard = ({ hotels, enquiry }) => {
   const [isLogged, setIsLogged] = useState();
   useEffect(() => {
     setIsLogged(Cookies.get('jwt'));
@@ -28,8 +29,11 @@ const Dashboard = ({ hotels }) => {
             <p className={styles.welcome}>
               👋🏼 &nbsp;Welcome back, <b>{Cookies.get('username')}</b>!
               <br />
-              Edit hotels, or add new ones.
+              See enquiries and edit hotels.
             </p>
+            <h2>Enqueries</h2>
+            <Enquiry enquiry={enquiry} />
+            <h2>Add or edit hotels</h2>
             <Table hotels={hotels} />
             <div className={styles.buttonContainer}>
               <Button href="/dashboard/addHotel">Add new hotel</Button>
@@ -57,10 +61,14 @@ export async function getServerSideProps() {
   const hotelResponse = await fetcher(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels`
   );
-  console.log(hotelResponse);
+  const enquiryResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/enquiries`
+  );
+
   return {
     props: {
       hotels: hotelResponse,
+      enquiry: enquiryResponse,
     },
   };
 }

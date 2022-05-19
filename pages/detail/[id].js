@@ -15,6 +15,7 @@ const Hotel = ({ hotel }) => {
   const [People, setPeople] = useState(parseFloat(peopleFromHomePage) || '0');
   const [date, setDate] = useState('');
   Cookies.set('people', People);
+  Cookies.set('HotelName', hotel.attributes.title);
 
   useEffect(() => {
     // Restoring dates from Local Storage to get it back as an array

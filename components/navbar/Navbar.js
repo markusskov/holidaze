@@ -23,7 +23,6 @@ const Navbar = () => {
       </div>
       <div className={styles.navLinks}>
         <Link href="/">Home</Link>
-        <Link href="/hotels">Hotels</Link>
         <Link href="/about">About</Link>
       </div>
       {isLogged ? (
