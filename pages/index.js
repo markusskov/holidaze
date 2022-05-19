@@ -23,7 +23,7 @@ export default function Home({ data, countries }) {
             title="Find the perfect place for 
         your holiday."
             text={
-              'Choose from a great wariety of hotels, cabins, or apartments and book your holiday today.'
+              'Choose from a great variety of hotels, in many different countries and book your holiday now!'
             }
             image={'illustrations/HotelIllustration.svg'}
           />
