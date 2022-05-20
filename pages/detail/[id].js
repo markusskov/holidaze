@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 
-const Hotel = ({ hotel }) => {
+const Hotel = ({ hotel, reviews }) => {
   const peopleFromHomePage = Cookies.get('people');
   const [People, setPeople] = useState(parseFloat(peopleFromHomePage) || '0');
   const [date, setDate] = useState('');
@@ -112,6 +112,17 @@ const Hotel = ({ hotel }) => {
             </div>
           </div>
         </div>
+        <div className={styles.reviews}>
+          <h2>Reviews</h2>
+          {reviews.map((review) => {
+            return (
+              <div key={review.id} className={styles.review}>
+                <strong key={review.id}>{review.attributes.name}</strong>
+                <p>{review.attributes.review}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
@@ -122,12 +133,13 @@ export default Hotel;
 export async function getServerSideProps({ params }) {
   const { id } = params;
   const hotelResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels/${id}`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels/${id}?populate=*`
   );
 
   return {
     props: {
       hotel: hotelResponse.data,
+      reviews: hotelResponse.data.attributes.reviews.data,
     },
   };
 }
