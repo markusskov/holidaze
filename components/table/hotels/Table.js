@@ -1,4 +1,4 @@
-import styles from './Table.module.scss';
+import styles from '../Table.module.scss';
 import { Edit } from 'tabler-icons-react';
 import Link from 'next/link';
 

@@ -1,6 +1,4 @@
-import styles from './Enquiry.module.scss';
-import { Edit } from 'tabler-icons-react';
-import Link from 'next/link';
+import styles from '../Table.module.scss';
 
 const Table = ({ enquiry }) => {
   return (

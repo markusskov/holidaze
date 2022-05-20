@@ -8,13 +8,15 @@ import { fetcher } from '../../lib/api';
 import Table from '../../components/table/hotels/Table';
 import { Button } from '../../components/buttons/Button';
 import Enquiry from '../../components/table/enquiry/Enquiry';
+import Message from '../../components/table/message/Message';
 
-const Dashboard = ({ hotels, enquiry }) => {
+const Dashboard = ({ hotels, enquiry, messages }) => {
   const [isLogged, setIsLogged] = useState();
   useEffect(() => {
     setIsLogged(Cookies.get('jwt'));
   }, []);
 
+  console.log(messages);
   return (
     <div>
       <Head>
@@ -29,8 +31,10 @@ const Dashboard = ({ hotels, enquiry }) => {
             <p className={styles.welcome}>
               👋🏼 &nbsp;Welcome back, <b>{Cookies.get('username')}</b>!
               <br />
-              See enquiries and edit hotels.
+              See messages, enquiries and edit hotels.
             </p>
+            <h2>Messages</h2>
+            <Message messages={messages} />
             <h2>Enqueries</h2>
             <Enquiry enquiry={enquiry} />
             <h2>Add or edit hotels</h2>
@@ -64,11 +68,15 @@ export async function getServerSideProps() {
   const enquiryResponse = await fetcher(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/enquiries`
   );
+  const messageResponse = await fetcher(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/messages`
+  );
 
   return {
     props: {
       hotels: hotelResponse,
       enquiry: enquiryResponse,
+      messages: messageResponse,
     },
   };
 }

@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Navbar from '../../components/navbar/Navbar';
 import styles from '../../styles/Home.module.css';
 import { ThemeIcon, Accordion } from '@mantine/core';
+
 import {
   Palette,
   AddressBook,
@@ -16,8 +17,35 @@ import {
   Edit,
   BookOff,
 } from 'tabler-icons-react';
+import { useState } from 'react';
 
 const About = () => {
+  // Form Info
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  // Send form info
+  async function SendMessage() {
+    const messageInfo = {
+      name: name,
+      email: email,
+      message: message,
+    };
+
+    const add = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/messages`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ data: messageInfo }),
+    });
+    <div>THank you!</div>;
+    const getResponse = await add.json();
+    console.log(getResponse);
+  }
+
   return (
     <div>
       <Head>
@@ -36,6 +64,44 @@ const About = () => {
             }
             image={'images/howitworks.png'}
           />
+
+          <div className={styles.formContainer}>
+            <form className={styles.form}>
+              <input
+                className={styles.formInput}
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                placeholder="Name"
+              />
+              <br />
+              <input
+                className={styles.formInput}
+                type="text"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                placeholder="Email"
+              />
+              <br />
+              <textarea
+                className={styles.formInput}
+                type="text"
+                onChange={(e) => setMessage(e.target.value)}
+                value={message}
+                placeholder="Message"
+              />
+
+              <br />
+              <button
+                className={styles.formButton}
+                type="button"
+                onClick={SendMessage}
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+
           <h2>FAQ</h2>
           <Accordion disableIconRotation>
             <Accordion.Item
