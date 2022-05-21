@@ -39,7 +39,7 @@ const Hotel = ({ hotel, reviews }) => {
               {hotel.attributes.title}, {hotel.attributes.city}
             </h1>
             <h2>Details</h2>
-            <h2>{hotel.attributes.prize}</h2>
+            <h2>{hotel.attributes.prize}$</h2>
             <h3>{hotel.attributes.country}</h3>
           </div>
           <div className={styles.mainImage}>
