@@ -4,7 +4,6 @@ import Cards from '../components/cards/Card';
 import Navbar from '../components/navbar/Navbar';
 import HotelSearch from '../components/search/Search';
 import SectionWithImage from '../components/sections/sectionWithImage/SectionWithImage';
-import { fetcher } from '../lib/api';
 import styles from '../styles/Home.module.css';
 
 export default function Home({ data, countries }) {

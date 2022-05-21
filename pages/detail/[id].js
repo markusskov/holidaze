@@ -4,7 +4,7 @@ import styles from './Detail.module.scss';
 import { fetcher } from '../../lib/api';
 import Image from 'next/image';
 import { NumberInput } from '@mantine/core';
-import { Bed, Italic } from 'tabler-icons-react';
+import { Bed } from 'tabler-icons-react';
 import { Button } from '../../components/buttons/Button';
 import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';

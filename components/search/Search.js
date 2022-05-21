@@ -1,9 +1,7 @@
 import styles from './Search.module.scss';
-
 import { useState, useEffect } from 'react';
 import { DateRangePicker } from '@mantine/dates';
 import { Calendar, Search } from 'tabler-icons-react';
-import Select from 'react-select';
 import { NumberInput } from '@mantine/core';
 import Cookies from 'js-cookie';
 

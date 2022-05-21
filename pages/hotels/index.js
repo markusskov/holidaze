@@ -7,11 +7,9 @@ import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { useQuery, useQueryClient } from 'react-query';
 import Cookies from 'js-cookie';
-import HotelSearch from '../../components/search/Search';
 import { NumberInput } from '@mantine/core';
 import moment from 'moment';
 import Router from 'next/router';
-import Link from 'next/link';
 
 const getHotels = async (key) => {
   const countriesId = key.queryKey[1].country.map(
