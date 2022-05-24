@@ -18,6 +18,7 @@ import {
   BookOff,
 } from 'tabler-icons-react';
 import { useState } from 'react';
+import Alert from '../../components/alert/Alert';
 
 const About = () => {
   // Form Info
@@ -33,17 +34,25 @@ const About = () => {
       message: message,
     };
 
-    const add = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/messages`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({ data: messageInfo }),
-    });
-    <div>THank you!</div>;
-    const getResponse = await add.json();
-    console.log(getResponse);
+    try {
+      const add = await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/messages`,
+        {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({ data: messageInfo }),
+        }
+      );
+      Alert('Success!', 'Your message have been sent.');
+      const getResponse = await add.json();
+      console.log(getResponse);
+    } catch (error) {
+      console.log(error);
+      Alert(`Something went wrong: ${error}`);
+    }
   }
 
   return (
@@ -77,7 +86,7 @@ const About = () => {
               <br />
               <input
                 className={styles.formInput}
-                type="text"
+                type="email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 placeholder="Email"
@@ -100,6 +109,7 @@ const About = () => {
                 Send Message
               </button>
             </form>
+            <div className="alert"></div>
           </div>
 
           <h2>FAQ</h2>

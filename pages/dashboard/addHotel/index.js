@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styles from './Addhotel.module.scss';
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import Alert from '../../../components/alert/Alert';
 
 const AddHotel = ({}) => {
   // Check if user is logged in
@@ -35,18 +36,23 @@ const AddHotel = ({}) => {
       img: hotelImg,
     };
 
-    const add = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-        Accept: 'application/json',
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({ data: hotelInfo }),
-    });
-
-    const getResponse = await add.json();
-    console.log(getResponse);
+    try {
+      const add = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ data: hotelInfo }),
+      });
+      Alert('Success!', 'New hotel has been added.');
+      const getResponse = await add.json();
+      console.log(getResponse);
+    } catch (error) {
+      console.log(error);
+      Alert(`Something went wrong: ${error}`);
+    }
   }
 
   return (
@@ -130,6 +136,7 @@ const AddHotel = ({}) => {
                   Add new hotel
                 </button>
               </form>
+              <div className="alert"></div>
             </div>
           </>
         ) : (

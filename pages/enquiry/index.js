@@ -5,6 +5,7 @@ import styles from './Enquiry.module.scss';
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 import Router from 'next/router';
+import Alert from '../../components/alert/Alert';
 
 const Enquiry = () => {
   const [people, setPeople] = useState('');
@@ -34,17 +35,24 @@ const Enquiry = () => {
       hotelName: hotel,
     };
 
-    const add = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/enquiries`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({ data: hotelInfo }),
-    });
-    Router.push('/success');
-    const getResponse = await add.json();
-    console.log(getResponse);
+    try {
+      const add = await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/enquiries`,
+        {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({ data: hotelInfo }),
+        }
+      );
+      Router.push('/success');
+      const getResponse = await add.json();
+      console.log(getResponse);
+    } catch (error) {
+      Alert(`Something went wrong: ${error}`);
+    }
   }
 
   return (

@@ -5,6 +5,7 @@ import styles from './Edithotel.module.scss';
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { fetcher } from '../../../lib/api';
+import Alert from '../../../components/alert/Alert';
 
 const EditHotel = ({ hotel }) => {
   // Check if user is logged in
@@ -38,21 +39,25 @@ const EditHotel = ({ hotel }) => {
       img: hotelImg,
     };
 
-    const add = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels/${hotel.id}`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-          Accept: 'application/json',
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ data: hotelInfo }),
-      }
-    );
-
-    const getResponse = await add.json();
-    console.log(getResponse);
+    try {
+      const add = await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/hotels/${hotel.id}`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+            Accept: 'application/json',
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({ data: hotelInfo }),
+        }
+      );
+      Alert('Success!', 'Changes to the hotel has been applied.');
+      const getResponse = await add.json();
+      console.log(getResponse);
+    } catch (error) {
+      Alert(`Something went wrong: ${error}`);
+    }
   }
 
   return (
@@ -148,6 +153,7 @@ const EditHotel = ({ hotel }) => {
                   Edit hotel
                 </button>
               </form>
+              <div className="alert"></div>
             </div>
           </>
         ) : (
