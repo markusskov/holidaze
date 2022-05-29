@@ -30,9 +30,7 @@ export default function Home({ data, countries }) {
         <div className={styles.secondaryBG}>
           <div className={styles.container}>
             <h2 className={styles.centerText}>
-              Search for your next vacation.
-              <br /> Set a date and the number of people and we will find you
-              hotels.
+              Set a date and number of people and we will find you hotels.
             </h2>
             <HotelSearch data={countries} />
             <div className={styles.centerText}>

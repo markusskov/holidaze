@@ -1,25 +1,88 @@
-.nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid #ddd;
+.navigation {
+  height: 60px;
   max-width: 1200px;
   margin: auto;
-  padding: 0 1rem;
-}
-.nav a {
-  margin-left: 12px;
-}
-.nav .logo {
-  margin-right: auto;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0.5rem 0rem;
+  background-color: #fff;
+  color: black;
+  border-bottom: 1px solid #ddd;
 }
 
-.signOut {
+.logo {
+  text-decoration: none;
+  color: black;
+  font-size: 1.3rem;
+  margin-left: 1rem;
+}
+.navMenu {
+  margin-left: auto;
+}
+
+.navMenuList {
+  display: flex;
+  padding: 0;
+}
+.navMenuItem {
+  list-style-type: none;
+  margin: 0 1rem;
+}
+.navMenuText {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+.hamburger {
+  border: 0;
+  height: 40px;
+  width: 40px;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: orange;
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  display: none;
+}
+.hamburger:hover {
+  background-color: orange;
 }
 
-@media (max-width: 767px) {
-  .navLinks {
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  .navMenuList {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
     display: none;
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  }
+  .navMenuItem {
+    text-align: center;
+    margin: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  .navMenuText {
+    color: black;
+    width: 100%;
+    padding: 1.5rem 0;
+  }
+  .navMenuText:hover {
+    background-color: #eee;
+  }
+  .navMenuExtended ul {
+    display: block;
   }
 }
