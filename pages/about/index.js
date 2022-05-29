@@ -1,8 +1,7 @@
 import SectionWithImage from '../../components/sections/sectionWithImage/SectionWithImage';
-import style from './About.module.scss';
+import styles from './About.module.scss';
 import Head from 'next/head';
 import Navbar from '../../components/navbar/Navbar';
-import styles from '../../styles/Home.module.scss';
 import { ThemeIcon, Accordion } from '@mantine/core';
 
 import {
@@ -74,6 +73,7 @@ const About = () => {
             image={'images/howitworks.png'}
           />
 
+          <h2>Got a question? Send us a message!</h2>
           <div className={styles.formContainer}>
             <form className={styles.form}>
               <input
