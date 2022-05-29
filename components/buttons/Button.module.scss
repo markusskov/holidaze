@@ -1,10 +1,12 @@
+@import '../../styles/variables.module';
+
 .buttonWrapper {
   padding: 2rem;
 }
 
 .add {
   color: white;
-  background-color: #ed7123;
+  background-color: $primary-color;
   padding: 1rem 3rem;
   border-radius: 18px;
   border: none;

@@ -1,3 +1,5 @@
+@import '../../styles/variables.module';
+
 .navigation {
   height: 60px;
   max-width: 1200px;
@@ -41,7 +43,7 @@
   width: 40px;
   padding: 0.5rem;
   border-radius: 50%;
-  background-color: orange;
+  background-color: $primary-color;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   position: absolute;
@@ -51,7 +53,7 @@
   display: none;
 }
 .hamburger:hover {
-  background-color: orange;
+  background-color: $primary-color;
 }
 
 @media screen and (max-width: 768px) {

@@ -2,7 +2,7 @@ import SectionWithImage from '../../components/sections/sectionWithImage/Section
 import style from './About.module.scss';
 import Head from 'next/head';
 import Navbar from '../../components/navbar/Navbar';
-import styles from '../../styles/Home.module.css';
+import styles from '../../styles/Home.module.scss';
 import { ThemeIcon, Accordion } from '@mantine/core';
 
 import {

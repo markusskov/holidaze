@@ -4,7 +4,7 @@ import Cards from '../components/cards/Card';
 import Navbar from '../components/navbar/Navbar';
 import HotelSearch from '../components/search/Search';
 import SectionWithImage from '../components/sections/sectionWithImage/SectionWithImage';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Home.module.scss';
 
 export default function Home({ data, countries }) {
   return (
