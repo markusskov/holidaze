@@ -11,6 +11,7 @@
   background-color: #fff;
   color: black;
   border-bottom: 1px solid #ddd;
+  z-index: 10;
 }
 
 .logo {
@@ -62,7 +63,7 @@
   }
   .navMenuList {
     position: absolute;
-    top: 60px;
+    top: 44px;
     left: 0;
     flex-direction: column;
     width: 100%;
