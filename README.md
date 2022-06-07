@@ -1,3 +1,5 @@
+# Holidaze
+
 ```bash
 Super Admin Credentials:
 Username: admin
@@ -7,37 +9,52 @@ Password: admin123
 Production website:
 [Holidaze Production Website](https://holidaze-tau.vercel.app/)
 
+
+
+## Description
+
+Hotel booking website, were admins can read, change and add elements.
+
+- Admin Pages
+- List of hotels from custom Strapi API
+- Create enquiries
+- Add, edit hotels from admin panel on the front-end.
+
+## Built With
+
+- [NextJS](https://nextjs.org/)
+- [Strapi](https://strapi.com)
+
 ## Getting Started
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Installing
 
-First, run the development server:
+To use this project:
+
+1. Clone the repo:
 
 ```bash
-npm run dev
-# or
-yarn dev
+git clone https://github.com/markusskov/holidaze.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install the dependencies:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
+yarn install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Running
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+To run the app, run the following commands:
 
-## Learn More
+```bash
+yarn run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open a pull request to contribute.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contact
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[My LinkedIn page](https://no.linkedin.com/in/markusskov)
